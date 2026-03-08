@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<title>Portfolio Simulator</title>
+
+<style>
+
+body{
+margin:0;
+font-family:-apple-system,BlinkMacSystemFont;
+background:#0b0f1a;
+color:white;
+}
+
+.header{
+text-align:center;
+padding:20px;
+font-size:22px;
+font-weight:600;
+}
+
+.balance{
+text-align:center;
+font-size:40px;
+margin-top:10px;
+}
+
+.sub{
+text-align:center;
+opacity:.7;
+}
+
+.card{
+background:#111827;
+margin:15px;
+padding:18px;
+border-radius:16px;
+}
+
+.asset{
+display:flex;
+justify-content:space-between;
+margin:10px 0;
+}
+
+.chart{
+height:120px;
+display:flex;
+align-items:flex-end;
+}
+
+.bar{
+width:4px;
+margin-right:2px;
+background:#22c55e;
+}
+
+.tabs{
+position:fixed;
+bottom:0;
+left:0;
+right:0;
+background:#020617;
+display:flex;
+justify-content:space-around;
+padding:12px;
+}
+
+.tab{
+opacity:.7;
+}
+
+.market button{
+margin-right:8px;
+background:#3b82f6;
+border:none;
+padding:8px 12px;
+border-radius:8px;
+color:white;
+}
+
+input{
+padding:10px;
+border-radius:8px;
+border:none;
+margin:4px;
+}
+
+button{
+background:#22c55e;
+border:none;
+padding:10px 12px;
+border-radius:8px;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+Portfolio Simulator
+</div>
+
+<div class="balance" id="balance">
+$1,245,000
+</div>
+
+<div class="sub">
+Simulation Mode
+</div>
+
+<div class="card">
+<h3>Market Chart</h3>
+<div class="chart" id="chart"></div>
+</div>
+
+<div class="card">
+<h3>Assets</h3>
+
+<div class="asset">
+<span>Bitcoin</span>
+<span id="btc">$68,000</span>
+</div>
+
+<div class="asset">
+<span>Ethereum</span>
+<span id="eth">$3,500</span>
+</div>
+
+<div class="asset">
+<span>Solana</span>
+<span id="sol">$140</span>
+</div>
+
+</div>
+
+<div class="card market">
+<h3>Market Simulator</h3>
+
+<button onclick="pump()">Pump 🚀</button>
+<button onclick="crash()">Crash 📉</button>
+
+</div>
+
+<div class="card">
+<h3>Edit Balance</h3>
+
+<input id="newBal" placeholder="new balance">
+
+<button onclick="updateBalance()">Update</button>
+
+</div>
+
+<div class="tabs">
+
+<div class="tab">Home</div>
+<div class="tab">Assets</div>
+<div class="tab">Market</div>
+<div class="tab">Settings</div>
+
+</div>
+
+<script>
+
+function makeChart(){
+
+let chart=document.getElementById("chart")
+
+chart.innerHTML=""
+
+for(let i=0;i<80;i++){
+
+let bar=document.createElement("div")
+
+bar.className="bar"
+
+bar.style.height=(Math.random()*90+10)+"px"
+
+chart.appendChild(bar)
+
+}
+
+}
+
+makeChart()
+
+setInterval(makeChart,3000)
+
+function pump(){
+
+document.getElementById("btc").innerText="$"+(70000+Math.floor(Math.random()*5000))
+
+document.getElementById("eth").innerText="$"+(3800+Math.floor(Math.random()*400))
+
+document.getElementById("sol").innerText="$"+(170+Math.floor(Math.random()*40))
+
+}
+
+function crash(){
+
+document.getElementById("btc").innerText="$"+(60000+Math.floor(Math.random()*3000))
+
+document.getElementById("eth").innerText="$"+(3000+Math.floor(Math.random()*400))
+
+document.getElementById("sol").innerText="$"+(100+Math.floor(Math.random()*30))
+
+}
+
+function updateBalance(){
+
+let v=document.getElementById("newBal").value
+
+document.getElementById("balance").innerText="$"+v
+
+}
+
+</script>
+
+</body>
+</html>
